@@ -1,0 +1,27 @@
+cmake_minimum_required(VERSION 3.10)
+project(PIC2si LANGUAGES CXX)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+# Incluir headers
+include_directories(include)
+
+# Archivos fuente
+set(SOURCES
+    src/main.cpp
+    src/particles.cpp
+    src/fields.cpp
+    src/diagnostics.cpp
+)
+
+# Ejecutable
+add_executable(pic1d ${SOURCES})
+
+# Copiar script Python al directorio de salida
+add_custom_command(TARGET pic1d POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+    "${CMAKE_SOURCE_DIR}/analysis.py"
+    $<TARGET_FILE_DIR:pic1d>
+)
+

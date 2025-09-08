@@ -1,0 +1,10 @@
+^C:\USERS\CONEJ\DOCUMENTS\FUSION\EPFL\INTRODUCTION\WEEK2\PIC2SI\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/conej/Documents/Fusion/EPFL/Introduction/Week2/PIC2si -BC:/Users/conej/Documents/Fusion/EPFL/Introduction/Week2/PIC2si/build --check-stamp-file C:/Users/conej/Documents/Fusion/EPFL/Introduction/Week2/PIC2si/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
