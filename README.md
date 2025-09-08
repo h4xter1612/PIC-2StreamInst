@@ -11,7 +11,7 @@ This project implements a **1D Particle-in-Cell (PIC)** simulation to model the 
 The code is written in **C++17**, modular, and supports:
 
 - Initialization of two counter-propagating electron streams.  
-- Solving the 1D Poisson equation to compute the electric field.  
+- Solving the 1D Poisson equation with a **tridiagonal matrix solver (Thomas algorithm)**.  
 - Particle push using **Leap Frog method** (position and velocity update).  
 - Calculation of **momentum**, **kinetic energy**, **potential energy**, and **total energy** of the system.  
 - Exporting data to CSV for analysis and visualization in Python.
