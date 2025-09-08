@@ -22,32 +22,19 @@ The main goal is to study the **time evolution of energy and momentum** and obse
 
 ## Project Structure
 
-PIC2si/                  # Root directory of the project
-
-├── include/              # Header files
-
-│   ├── particles.hh      # Particle class declarations
-
-│   ├── fields.hh         # Field class declarations
-
-│   └── diagnostics.hh    # Functions for momentum and energy calculations
-
-├── src/                  # Source files
-
-│   ├── main.cpp          # Main program
-
-│   ├── particles.cpp     # Particle class implementation
-
-│   ├── fields.cpp        # Field class implementation
-
-│   └── diagnostics.cpp   # Diagnostics function implementations
-
-├── analysis.py           # Python script for plotting simulation results
-
-├── CMakeLists.txt        # CMake build configuration
-
-└── README.md             # Project documentation
-
+- **PIC2si/** – Root directory of the project
+  - **include/** – Header files
+    - `particles.hh` – Particle class declarations
+    - `fields.hh` – Field class declarations
+    - `diagnostics.hh` – Functions for momentum and energy calculations
+  - **src/** – Source files
+    - `main.cpp` – Main program
+    - `particles.cpp` – Particle class implementation
+    - `fields.cpp` – Field class implementation
+    - `diagnostics.cpp` – Diagnostics function implementations
+  - `analysis.py` – Python script for plotting simulation results
+  - `CMakeLists.txt` – CMake build configuration
+  - `README.md` – Project documentation
 ---
 
 ## Build
