@@ -80,10 +80,12 @@ Run the script in the same folder as the CSV:
 
 python analysis.py
 
+### Phase Space Evolution
+The script `phaseSpace.py` generates an **animated GIF** showing the phase space dynamics:
 
 It will generate a plot showing the temporal evolution of the physical quantities.
 
----
+python phaseSpace.py
 
 ### Example result:
 
