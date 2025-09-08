@@ -10,27 +10,50 @@ Fields::Fields(int NG_, double L_) : NG(NG_), L(L_) {
 }
 
 void Fields::deposit_charge(const std::vector<double>& x, double alpha_p) {
-    std::fill(rho.begin(), rho.end(), 0.0);
+    std::fill(rho.begin(), rho.end(), 1.0); // Background charge
 
     for (double xp : x) {
-        int g = static_cast<int>(xp / dx) % NG;
-        rho[g] += -alpha_p / dx;  // electrones negativos
+        double g = xp / dx;
+        int g0 = static_cast<int>(g) % NG;
+        double frac = g - g0;
+        int g1 = (g0 + 1) % NG;
+
+        rho[g0] += -alpha_p * (1 - frac) / dx;
+        rho[g1] += -alpha_p * frac / dx;
     }
 }
 
 void Fields::solve_poisson() {
-    // simple solver (no FFT): phi[g] = -rho[g]*dx^2 / 2 (aprox)
-    // -> aquí puedes luego meter un solver más realista
-    for (int g = 0; g < NG; g++) {
-        phi[g] = -0.5 * rho[g] * dx * dx;
+    // Implement a proper tridiagonal solver
+    int n = NG;
+    std::vector<double> a(n-1, 1.0);
+    std::vector<double> b(n, -2.0);
+    std::vector<double> c(n-1, 1.0);
+    std::vector<double> d(n);
+    
+    for (int i = 0; i < n; i++) {
+        d[i] = rho[i] * dx * dx;
+    }
+    
+    // Thomas algorithm
+    for (int i = 1; i < n; i++) {
+        double m = a[i-1] / b[i-1];
+        b[i] -= m * c[i-1];
+        d[i] -= m * d[i-1];
+    }
+    
+    phi[n-1] = d[n-1] / b[n-1];
+    for (int i = n-2; i >= 0; i--) {
+        phi[i] = (d[i] - c[i] * phi[i+1]) / b[i];
     }
 }
 
 void Fields::compute_electric_field() {
+    // More accurate electric field calculation
     for (int g = 0; g < NG; g++) {
-        int g_left = (g - 1 + NG) % NG;
-        int g_right = (g + 1) % NG;
-        E[g] = (phi[g_left] - phi[g_right]) / (2.0 * dx);
+        int g_prev = (g == 0) ? NG-1 : g-1;
+        int g_next = (g == NG-1) ? 0 : g+1;
+        E[g] = (phi[g_prev] - phi[g_next]) / (2.0 * dx);
     }
 }
 

@@ -11,7 +11,7 @@ struct Particles {
 
     Particles(int N_, double L_);
 
-    void initialize_two_stream(double V0, double perturbation);
+    void initialize_two_stream(double V0, double perturbation, double VT);
     void push(double dt, const std::vector<double>& E, double dx);
 };
 

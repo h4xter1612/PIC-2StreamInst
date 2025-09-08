@@ -17,11 +17,12 @@ int main() {
     double dt = 0.5;
     int NT = 200;
     double V0 = 0.2;
+    double VT = 0;
     double perturb = 1.0;
     double alpha_p = (1.0 * L) / N;
 
     Particles particles(N, L);
-    particles.initialize_two_stream(V0, perturb);
+    particles.initialize_two_stream(V0, perturb, VT);
 
     // Abrir archivo CSV
     std::ofstream fout("diagnostics.csv");
