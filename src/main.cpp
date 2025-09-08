@@ -26,7 +26,9 @@ int main() {
 
     // Abrir archivo CSV
     std::ofstream fout("diagnostics.csv");
+    std::ofstream phase_out("phase_space.csv");
     fout << "time,momentum,Ekin,Epot,Etotal\n";
+    phase_out << "time,particle_id,x,v,beam_id\n";
 
     Fields fields(NG, L);
 
@@ -46,11 +48,21 @@ int main() {
                   << Ek << ","
                   << Ep << ","
                   << Ek+Ep << "\n";
+
+        // Guardar datos del espacio de fase cada 10 de tiempo
+        if (it % 1 == 0) {
+            for (int i = 0; i < N; i++) {
+                phase_out << it*dt << "," << i << "," << particles.x[i] << ","
+                        << particles.v[i] << "," << particles.beam_id[i] << "\n";
+            }
+        }
     }
-
+    
+    std::cout << "Simulation completed.\n";
     fout.close();
-    std::cout << "Simulation completed. CSV generated: diagnostics.csv\n";
-
+    std::cout << "CSV generated: diagnostics.csv\n";
+    phase_out.close();
+    std::cout << "CSV generated: phase_space.csv\n";
     return 0;
 }
 

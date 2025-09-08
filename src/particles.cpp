@@ -5,6 +5,7 @@
 Particles::Particles(int N_, double L_) : N(N_), L(L_) {
     x.resize(N);
     v.resize(N);
+    beam_id.resize(N);
 }
 
 void Particles::initialize_two_stream(double V0, double perturbation, double VT) {
@@ -15,6 +16,7 @@ void Particles::initialize_two_stream(double V0, double perturbation, double VT)
         int sign = (i % 2 == 0) ? 1 : -1;
         v[i] = sign * V0 + VT * dis(gen); // Add thermal noise if VT≠0;    // dos corrientes opuestas
         x[i] += perturbation * (L / N) * sign * dis(gen);
+        beam_id[i] = sign; // Identificador de haz
     }
 }
 

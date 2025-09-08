@@ -18,10 +18,15 @@ set(SOURCES
 # Ejecutable
 add_executable(pic1d ${SOURCES})
 
-# Copiar script Python al directorio de salida
-add_custom_command(TARGET pic1d POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different
-    "${CMAKE_SOURCE_DIR}/analysis.py"
-    $<TARGET_FILE_DIR:pic1d>
-)
+# Buscar todos los .py en la carpeta raíz del proyecto
+file(GLOB PY_SCRIPTS "${CMAKE_SOURCE_DIR}/*.py")
+
+# Copiar cada uno después del build
+foreach(script ${PY_SCRIPTS})
+    add_custom_command(TARGET pic1d POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${script}"
+        $<TARGET_FILE_DIR:pic1d>)
+endforeach()
+
 
