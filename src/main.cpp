@@ -11,11 +11,11 @@
 
 int main() {
     // parámetros
-    int N = 1000;
-    int NG = 32;
+    int N = 1000 * 2;
+    int NG = 32 * 2;
     double L = M_PI;
-    double dt = 0.5;
-    int NT = 200;
+    double dt = 0.5 / 2;
+    int NT = 200 * 2;
     double V0 = 0.2;
     double VT = 0;
     double perturb = 1.0;
