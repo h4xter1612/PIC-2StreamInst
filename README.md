@@ -15,6 +15,7 @@ The code is written in **C++17**, modular, and supports:
 - Particle push using **Euler method** (position and velocity update).  
 - Calculation of **momentum**, **kinetic energy**, **potential energy**, and **total energy** of the system.  
 - Exporting data to CSV for analysis and visualization in Python.
+- **Phase space animation** to observe the temporal evolution of the instability.
 
 The main goal is to study the **time evolution of energy and momentum** and observe the growth of the instability.
 
@@ -33,6 +34,7 @@ The main goal is to study the **time evolution of energy and momentum** and obse
     - `fields.cpp` – Field class implementation
     - `diagnostics.cpp` – Diagnostics function implementations
   - `analysis.py` – Python script for plotting simulation results
+  - `phaseSpace.py` – Python script for generating phase space animation
   - `CMakeLists.txt` – CMake build configuration
   - `README.md` – Project documentation
 ---
@@ -82,6 +84,13 @@ python analysis.py
 It will generate a plot showing the temporal evolution of the physical quantities.
 
 ---
+
+### Example result:
+
+![Phase Space Evolution](include/phase_space_evolution.gif)
+
+---
+
 
 ## Customization
 
